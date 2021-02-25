@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="degrees">0º</string>
+    <string name="city"></string>
+    <string name="state"></string>
+    <string name="welcome">Welcome to Weather Nicaragua App</string>
+</resources>
