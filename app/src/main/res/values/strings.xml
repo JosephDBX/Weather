@@ -4,4 +4,9 @@
     <string name="city"></string>
     <string name="state"></string>
     <string name="welcome">Welcome to Weather Nicaragua App</string>
+    <string name="menu_1">Menu Item 1</string>
+    <string name="menu_2">Menu Item 2</string>
+    <string name="menu_3">Menu Item 3</string>
+    <string name="menu_search">Search City</string>
+    <string name="menu_share">Share City Weather</string>
 </resources>

@@ -3,11 +3,14 @@ package com.josephdbx.weather
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.ListView
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.josephdbx.weather.adapters.CityItem
 import com.josephdbx.weather.adapters.CityListAdapter
 
@@ -16,9 +19,15 @@ class MainActivity : AppCompatActivity() {
         const val CITY_ID = "com.josephdbx.weather.CITY_ID"
     }
 
+    var toolbar: Toolbar? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        toolbar = findViewById(R.id.tbApp)
+        toolbar?.setTitle(R.string.app_name)
+        setSupportActionBar(toolbar)
 
         /*val bManagua = findViewById<Button>(R.id.bManagua)
 
@@ -79,5 +88,51 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+
+        val miSearch = menu?.findItem(R.id.mi_search)
+        val viewSearch = miSearch?.actionView as SearchView
+
+        viewSearch.queryHint = getResources().getString(R.string.menu_search)
+
+        // Used to load & release data to make search
+        viewSearch.setOnQueryTextFocusChangeListener { v, hasFocus -> Log.d("HAS FOCUS", hasFocus.toString()) }
+
+        viewSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Toast.makeText(applicationContext, query, Toast.LENGTH_SHORT).show()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("onQueryTextChange", newText.toString())
+                return true
+            }
+        })
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item?.itemId) {
+            R.id.mi1 -> {
+                Toast.makeText(this, "Menu Item 1", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.mi2 -> {
+                Toast.makeText(this, "Menu Item 2", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            R.id.mi3 -> {
+                Toast.makeText(this, "Menu Item 3", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
     }
 }
